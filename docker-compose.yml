@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  db:
+    image: postgres:15-alpine
+    container_name: lumora-db
+    environment:
+      POSTGRES_DB: lumora
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres_secure_pass}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - lumora-network
+    restart: always
+
+  # Redis Caching Service
+  redis-cache:
+    image: redis:7-alpine
+    container_name: lumora-redis-cache
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-cache-data:/data
+    networks:
+      - lumora-network
+    restart: always
+
+  # Redis Queue Service
+  redis-queue:
+    image: redis:7-alpine
+    container_name: lumora-redis-queue
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-queue-data:/data
+    networks:
+      - lumora-network
+    restart: always
+
+  # Frappe Backend Application
+  backend:
+    image: frappe/frappe-worker:v15
+    container_name: lumora-backend
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_CACHE=redis-cache:6379
+      - REDIS_QUEUE=redis-queue:6379
+    volumes:
+      - sites-data:/home/frappe/frappe-bench/sites
+      - apps-data:/home/frappe/frappe-bench/apps
+    depends_on:
+      - db
+      - redis-cache
+      - redis-queue
+    networks:
+      - lumora-network
+    restart: always
+
+  # Frontend Web Client
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/frontend.Dockerfile
+    container_name: lumora-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - lumora-network
+    restart: always
+
+  # Nginx Reverse Proxy
+  nginx:
+    image: nginx:alpine
+    container_name: lumora-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - sites-data:/var/www/html/assets
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - lumora-network
+    restart: always
+
+networks:
+  lumora-network:
+    driver: bridge
+
+volumes:
+  db-data:
+  redis-cache-data:
+  redis-queue-data:
+  sites-data:
+  apps-data:
