@@ -9,6 +9,7 @@ export const studentRoutes: RouteRecordRaw[] = [
       title: 'Dashboard - LUMORA',
       layout: 'student',
       requiresAuth: true,
+      roles: ["student"],
     },
   },
   {
@@ -29,6 +30,7 @@ export const studentRoutes: RouteRecordRaw[] = [
       title: 'Track Progress - LUMORA',
       layout: 'student',
       requiresAuth: true,
+      roles: ["student"],
     },
   },
   {
@@ -49,6 +51,7 @@ export const studentRoutes: RouteRecordRaw[] = [
       title: 'Profile Settings - LUMORA',
       layout: 'student',
       requiresAuth: true,
+      roles: ["student"],
     },
   },
   {
