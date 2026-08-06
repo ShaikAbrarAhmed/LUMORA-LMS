@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { authService } from '@/services/auth.service';
 import type { User, LoginCredentials, SignupCredentials } from '@/types/auth';
 import { hasToken } from '@/utils/token';
