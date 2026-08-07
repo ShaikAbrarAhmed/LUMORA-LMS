@@ -1,22 +1,52 @@
 <template>
   <div class="space-y-8 text-left">
-    <!-- Top Greeting Section -->
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-      <div>
-        <h1 class="text-3xl font-extrabold text-lumora-primary tracking-tight">
-          Welcome back, {{ authStore.user?.name || 'Student' }}!
-        </h1>
-        <p class="text-sm text-lumora-secondary mt-1">Here is a summary of your active learning programs and progress.</p>
-      </div>
-      <div class="flex gap-3">
-        <Button variant="secondary" @click="refreshData">
-          <RefreshCwIcon class="w-4 h-4" :class="{ 'animate-spin': dashboardStore.isLoading || programStore.isLoading }" />
-          <span>Refresh Data</span>
-        </Button>
-        <Button variant="primary" @click="showModal = true">
-          <PlusIcon class="w-4 h-4" />
-          <span>Schedule Session</span>
-        </Button>
+    <!-- Hero Card -->
+    <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-lumora-surface/70 backdrop-blur-xl p-8 md:p-10">
+      <!-- Subtle ambient glows -->
+      <div class="absolute -top-24 -right-20 w-72 h-72 rounded-full bg-white/[0.03] blur-[120px] pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-20 w-72 h-72 rounded-full bg-lumora-accent/[0.03] blur-[120px] pointer-events-none"></div>
+
+      <div class="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+        <!-- Greeting + copy + info pills -->
+        <div class="max-w-xl">
+          <h1 class="font-outfit text-3xl md:text-4xl font-extrabold tracking-tight text-lumora-primary">
+            Welcome back, {{ authStore.user?.name || 'Student' }}
+          </h1>
+          <p class="text-sm text-lumora-secondary mt-3 leading-relaxed max-w-md">
+            Continue your learning journey with personalized courses, progress tracking, and upcoming learning activities.
+          </p>
+
+          <!-- Hero info pills (visual only) -->
+          <div class="flex flex-wrap items-center gap-2.5 mt-6">
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-lumora-primary select-none">
+              <LayoutDashboardIcon class="w-3.5 h-3.5 text-lumora-accent" />
+              Personalized Dashboard
+            </span>
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-lumora-primary select-none">
+              <ActivityIcon class="w-3.5 h-3.5 text-lumora-accent" />
+              Real-time Progress
+            </span>
+            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-lumora-primary select-none">
+              <SparklesIcon class="w-3.5 h-3.5 text-lumora-accent" />
+              AI Learning Insights
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero actions -->
+        <div class="flex flex-col sm:flex-row lg:shrink-0 sm:items-center gap-3">
+          <Button variant="secondary" class="w-full sm:w-auto !py-3 !px-6 group active:scale-[0.98]" @click="refreshData">
+            <RefreshCwIcon
+              class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+              :class="{ 'animate-spin': dashboardStore.isLoading || programStore.isLoading }"
+            />
+            <span>Refresh Data</span>
+          </Button>
+          <Button variant="primary" class="w-full sm:w-auto !py-3 !px-6 shadow-lg shadow-white/5 group active:scale-[0.98]" @click="showModal = true">
+            <PlusIcon class="w-4 h-4 transition-transform duration-200 group-hover:scale-110" />
+            <span>Schedule Session</span>
+          </Button>
+        </div>
       </div>
     </div>
 
@@ -143,7 +173,10 @@ import {
   Clock as ClockIcon, 
   Trophy as TrophyIcon,
   RefreshCw as RefreshCwIcon,
-  Plus as PlusIcon
+  Plus as PlusIcon,
+  LayoutDashboard as LayoutDashboardIcon,
+  Activity as ActivityIcon,
+  Sparkles as SparklesIcon
 } from '@lucide/vue';
 import Card from '@/components/Card.vue';
 import Button from '@/components/Button.vue';

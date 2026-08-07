@@ -1,7 +1,7 @@
 <template>
-  <Card padding="lg" class="w-full max-w-md mx-auto shadow-2xl border-white/10 bg-lumora-surface/80 backdrop-blur-xl">
+  <Card padding="lg" class="w-full max-w-md mx-auto shadow-2xl border-white/10 bg-lumora-surface/80 backdrop-blur-xl !p-7">
     <!-- Brand / Header -->
-    <div class="flex flex-col items-center gap-2.5 mb-7 text-center">
+    <div class="flex flex-col items-center gap-2 mb-6 text-center">
       <div class="w-12 h-12 bg-lumora-accent text-lumora-bg rounded-2xl flex items-center justify-center text-2xl font-black select-none shadow-lg shadow-white/5 mb-1">
         L
       </div>
@@ -14,7 +14,7 @@
     </div>
 
     <!-- Credential form (primary action) -->
-    <form @submit.prevent="handleLogin" class="flex flex-col gap-4">
+    <form @submit.prevent="handleLogin" class="flex flex-col gap-3.5">
       <Input
         v-model="email"
         type="email"
@@ -67,7 +67,7 @@
     </form>
 
     <!-- Divider -->
-    <div class="flex items-center gap-4 my-5">
+    <div class="flex items-center gap-4 my-4">
       <span class="flex-1 h-px bg-white/[0.08]"></span>
       <span class="text-[11px] uppercase tracking-widest text-lumora-secondary/60 font-medium select-none">or</span>
       <span class="flex-1 h-px bg-white/[0.08]"></span>
@@ -88,7 +88,7 @@
     </button>
 
     <!-- Inline sign-up prompt -->
-    <div class="mt-5 pt-5 border-t border-white/[0.08] text-center text-[13px]">
+    <div class="mt-4 pt-4 border-t border-white/[0.08] text-center text-[13px]">
       <span class="text-lumora-secondary font-light">Don't have an account? </span>
       <router-link to="/signup" class="text-lumora-accent font-semibold hover:text-lumora-highlight hover:underline underline-offset-4 transition-colors duration-200">
         Sign up
@@ -96,7 +96,7 @@
     </div>
 
     <!-- Security note -->
-    <div class="mt-4 flex items-center justify-center gap-1.5 text-[11px] text-lumora-secondary/50">
+    <div class="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-lumora-secondary/50">
       <ShieldCheck class="w-3.5 h-3.5" />
       <span>Protected by enterprise-grade security</span>
     </div>
