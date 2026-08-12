@@ -1,0 +1,47 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2026-08-11 17:34:55.177568",
+  "name": "Student",
+  "role_profile": "Student",
+  "roles": [
+   {
+    "parent": "Student",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "Student"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2026-08-11 17:36:16.349693",
+  "name": "Mentor",
+  "role_profile": "Mentor",
+  "roles": [
+   {
+    "parent": "Mentor",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "Mentor"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2026-08-11 17:37:06.925719",
+  "name": "Admin",
+  "role_profile": "Admin",
+  "roles": [
+   {
+    "parent": "Admin",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "Admin"
+   }
+  ]
+ }
+]
