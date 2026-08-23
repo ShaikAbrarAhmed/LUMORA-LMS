@@ -68,3 +68,9 @@ fixtures = [
         ]
     }
 ]
+
+doc_events = {
+    "User": {
+        "after_insert": "lumora.services.profile_service.create_profile_for_user"
+    }
+}
