@@ -1,1 +1,0 @@
-# Lumora LMS backend module
