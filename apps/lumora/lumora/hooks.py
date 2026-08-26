@@ -54,8 +54,7 @@ required_apps = ["frappe"]
 # Testing
 # -------
 # before_tests = "lumora.tests.before_tests"
-<<<<<<< HEAD
-=======
+
 fixtures = [
     {
         "dt": "Role",
@@ -76,4 +75,3 @@ doc_events = {
         "after_insert": "lumora.services.profile_service.create_profile_for_user"
     }
 }
->>>>>>> 1ad0739 (feat(lumora): add student and mentor profiles)
