@@ -25,7 +25,15 @@ export const setupAuthGuards = (router: Router) => {
     if (to.meta.requiresAuth && !isAuthenticated) {
       return next({ name: 'login', query: { redirect: to.fullPath } });
     }
-
+    const requiredRoles = to.meta.roles as string[] | undefined;
+    if (
+      requiredRoles &&
+      authStore.user &&
+      !requiredRoles.includes(authStore.user.role)
+    ) {
+      return next({ name: 'dashboard' });
+    }
+    
     // Handle Guest-Only Routes (e.g., Login, Signup)
     if (to.meta.guestOnly && isAuthenticated) {
       return next({ name: 'dashboard' }); // Redirect authenticated users away from guest pages
